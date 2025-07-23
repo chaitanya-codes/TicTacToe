@@ -10,7 +10,7 @@ const Box = ({ symbol, playerSymbol, id, turn, active, setActive }: { symbol: st
   return (
     <div
       onClick={() => {
-        let res = setActive();
+        const res = setActive();
         if (res) {
           if (res == "active") setText("Occupied");
           else if (res == "computer") setText("Computer's turn");

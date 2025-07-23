@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
 
 const ThemeChanger = () => {
-    let { theme, setTheme } = useContext(ThemeContext);
+    const { theme, setTheme } = useContext(ThemeContext);
     return (
         <div className="fixed top-2 right-4 w-18 h-8 bg-neutral-400 rounded-lg">
             <button

@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
 
-const Box = ({ symbol, playerSymbol, id, turn, active, setActive }: { symbol: string, id: number, playerSymbol: Array<string>, turn: number, active: boolean, setActive: any }) => {
+const Box = ({ symbol, playerSymbol, id, turn, active, setActive }: { symbol: string, id: number, playerSymbol: Array<string>, turn: number, active: boolean, setActive: unknown }) => {
   const { theme } = useContext(ThemeContext);
   const [showOccupied, setShowOccupied] = useState(false);
   const [placeholder, setPlaceholder] = useState(false)

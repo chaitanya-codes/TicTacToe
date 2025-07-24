@@ -22,6 +22,7 @@ const Board = () => {
     setStarted(true);
     const winner = checkWinner();
     if (winner) return won(winner);
+    if (checkTie()) return;
     setTimeout(() => { if (!pvp && !turn) computerMove() }, (1 + Math.floor(Math.random() * 4)) * 350)
   }
 
@@ -33,17 +34,18 @@ const Board = () => {
     if (winMove || blockMove) {
       if (winMove) copy[winMove.i][winMove.j] = playerSymbol[1];
       else if (blockMove) copy[blockMove.i][blockMove.j] = playerSymbol[1];
-    } else {
+    } else if (!checkTie()) {
       let row = Math.floor(Math.random() * 3);
       let col = Math.floor(Math.random() * 3);
       while (copy[row][col]) {
         row = Math.floor(Math.random() * 3);
-        col = Math.floor(Math.random() * 3);
+        col = Math.floor(Math.random() * 3);    
       }
       copy[row][col] = playerSymbol[1];
     }
     setBoard(copy);
     setTurn(turn => turn == 0 ? 1 : 0);
+    if (checkTie()) return;
     const winner = checkWinner();
     if (winner) return won(winner);
   }
@@ -73,9 +75,20 @@ const Board = () => {
     return false;
   }
   
-  const won = (winner: string) => {
+  const checkTie = () => {
+    for (let i = 0; i < board.length; i++) {
+      for (let j = 0; j < board[i].length; j++) {
+        if (!board[i][j]) return false;
+      }
+    }
+    won(null);
+    return true;
+  }
+
+  const won = (winner: string | null) => {
     setTimeout(() => {
-      alert(winner + " wins");
+      if (winner) alert(winner + " wins");
+      else alert("It's a tie!");
       setTurn(0);
       setBoard(defaultBoard());
       setStarted(false);

@@ -86,8 +86,8 @@ const Board = () => {
     <div>
       <div className="players absolute left-10 flex flex-col gap-5">
         <h1>Player Names:</h1>
-        <input type="text" placeholder='Player 1' className='p-3' onChange={e => setPlayers([e.target.value, players[1]])} />
-        <input type="text" placeholder='Player 2' className='p-3' onChange={e => setPlayers([players[0], e.target.value])} disabled={!pvp} />
+        <input type="text" placeholder='Player 1' className='p-3 placeholder:text-slate-500' onChange={e => setPlayers([e.target.value, players[1]])} />
+        <input type="text" placeholder='Player 2' className='p-3 placeholder:text-slate-500' onChange={e => setPlayers([players[0], e.target.value])} disabled={!pvp} />
       </div>
       <div className="info p-4">
         <span className='text-lg'>Turn: {turn == 0 ? players[0] : players[1]}</span>

@@ -10,7 +10,7 @@ export default function Home() {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) setTheme(true);
   }, [])
   return (
-    <div className={`flex justify-center items-center h-screen w-screen ${theme ? "bg-gray-800 text-white" : "bg-gray-200"}`}>
+    <div className={`flex justify-center items-center h-screen w-screen ${theme ? "bg-gray-800 text-gray-200" : "bg-gray-200"}`}>
       <ThemeContext.Provider value={{theme, setTheme}}>
         <ThemeChanger />
         <Board />

@@ -96,15 +96,23 @@ const Board = () => {
   }
 
   return (
-    <div>
-      <div className="players absolute left-10 flex flex-col gap-5">
+    <div className='flex flex-col md:flex-row md:justify-around items-center md:items-start w-screen mt-8'>
+      <div className="players sm:flex flex-col gap-5 mt-8 shrink-2 self-start absolute md:relative md:self-auto hidden">
         <h1>Player Names:</h1>
         <input type="text" placeholder='Player 1' className='p-3 placeholder:text-slate-500' onChange={e => setPlayers([e.target.value, players[1]])} />
         <input type="text" placeholder='Player 2' className='p-3 placeholder:text-slate-500' onChange={e => setPlayers([players[0], e.target.value])} disabled={!pvp} />
       </div>
-      <div className="info p-4">
-        <span className='text-lg'>Turn: {turn == 0 ? players[0] : players[1]}</span>
-        <div className="pvp absolute right-16 bg-indigo-300 p-5 flex flex-col gap-4">
+      <div id="board" className={`relative shrink-0 board md:w-[33vmax] md:h-[33vmax] w-[45vmax] h-[45vmax] grid grid-cols-3 grid-rows-3 gap-1 bg-slate-400`}>
+        <span className='text-lg absolute -top-10'>Turn: {turn == 0 ? players[0] : players[1]}</span>
+        {Array.from({ length: 3 }).map((_, i) => {
+          return Array.from({ length: 3 }).map((_, j) => {
+            return <Box key={i + j + 1} id={i + j + 1} turn={turn} playerSymbol={playerSymbol} symbol={board[i][j]} setActive={() => click(i, j)} />
+          })
+        })
+        }
+      </div>
+      <div className="info flex">
+        <div className="mt-8 bg-indigo-300 p-6 flex flex-col gap-4">
           <h3 className='text-lg text-teal-800'>
             {players[0]} <span className='text-black'>v/s</span> {pvp ? players[1] : `🤖 Computer`}
           </h3>
@@ -129,14 +137,6 @@ const Board = () => {
             </button>
           </div>
         </div>
-      </div>
-      <div id="board" className={`board w-[500px] h-[500px] grid grid-cols-3 grid-rows-3 gap-1 bg-slate-400`}>
-        {Array.from({ length: 3 }).map((_, i) => {
-          return Array.from({ length: 3 }).map((_, j) => {
-            return <Box key={i + j + 1} id={i + j + 1} turn={turn} playerSymbol={playerSymbol} symbol={board[i][j]} setActive={() => click(i, j)} />
-          })
-        })
-        }
       </div>
     </div>
   )
